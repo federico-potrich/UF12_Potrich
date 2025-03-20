@@ -1,0 +1,29 @@
+{
+  "background.fullscreen": {
+    "useFront": true,
+    "style": {
+      "opacity": 0.2
+    },
+    "styles": [
+      {}
+    ],
+    // Local images can be dragged into the browser to quickly get the file protocol address from the address bar
+    "images": [
+      "https://i.pinimg.com/736x/3e/37/b5/3e37b5abb884c64183cf2460a371741a.jpg",
+      "https://i.pinimg.com/736x/52/06/51/520651490a1dcf61ff2db5c47699d73f.jpg",
+      "https://i.pinimg.com/736x/9a/81/21/9a81212d15bcb7d79bd152d74779a614.jpg",
+      "https://i.pinimg.com/736x/81/f2/7c/81f27c6dc0989e6beceb188632e136ee.jpg",
+      "https://i.pinimg.com/736x/98/27/35/982735d9efc89ee7d32fde6b497588e8.jpg"
+    ],
+    "interval": 15,
+  },
+  "workbench.colorCustomizations": {
+    "terminal.border": "#ffe9fb",
+  },
+  "powermode.enabled": true,
+  "powermode.presets": "particles",
+  "powermode.explosions.customCss": {},
+  "powermode.combo.timeout": 0,
+  "powermode.shake.enabled": false,
+  "powermode.combo.counterSize": 0
+}
