@@ -1,5 +1,6 @@
+import { ClassesDataServiceService } from './../core/service/ClassesData/classes-data-service.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenu, PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
@@ -14,12 +15,13 @@ import { CharacterDataService } from './../core/service/CharacterData/character-
 export class AppComponent implements OnInit {
     items: MenuItem[] | undefined;
 
-    CDSRV = inject(CharacterDataService);
-    
+    readonly CDSRV = inject(CharacterDataService);
+    readonly #router = inject(Router);
+    readonly classesDataServiceTMP = inject(ClassesDataServiceService);
     ngOnInit() {
         this.items = [
             {
-                label: '',
+                label: 'Menu',
                 items: [
                     {
                         label: 'Classes-Subclasses',
@@ -28,6 +30,10 @@ export class AppComponent implements OnInit {
                             {
                                 label: 'Classes',
                                 icon: 'ì',
+                                command: ()=>{
+                                    this.#router.navigate(['/classes'])
+                                    this.classesDataServiceTMP.getBriefData()
+                                }
                             },
                             {
                                 label: 'Subclasses',
@@ -87,7 +93,8 @@ export class AppComponent implements OnInit {
                                 label: 'Ability',
                                 icon: '',
                                 command: () => {
-                                    this.CDSRV.getData();
+                                    this.#router.navigate(['/character'])
+                                    this.CDSRV.getData('ability-scores');
                                 }
                             },
                             {

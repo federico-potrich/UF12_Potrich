@@ -21,9 +21,7 @@ export const appConfig: ApplicationConfig = {
             }
         }),
         
-    provideAppInitializer(() => {
-      inject(CharacterDataService).getData();
-    }),
+    provideAppInitializer(() => {}),
     provideHttpClient(),
   ]
 };
