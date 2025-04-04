@@ -1,108 +1,134 @@
-import { PanelMenu, PanelMenuModule } from 'primeng/panelmenu';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { PanelMenu, PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
+import { CharacterDataService } from './../core/service/CharacterData/character-data.service';
 
 @Component({
     selector: 'app-root',
-    imports: [ButtonModule, PanelMenuModule, PanelMenu],
+    imports: [ButtonModule, PanelMenuModule, PanelMenu, RouterOutlet],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
     items: MenuItem[] | undefined;
 
+    CDSRV = inject(CharacterDataService);
+    
     ngOnInit() {
         this.items = [
             {
-                label: 'Classes-Subclasses',
-                icon: 'pi pi-file',
+                label: '',
                 items: [
                     {
-                        label: 'Classes',
-                        icon: 'pi pi-file',
+                        label: 'Classes-Subclasses',
+                        icon: '',
+                        items: [
+                            {
+                                label: 'Classes',
+                                icon: 'ì',
+                            },
+                            {
+                                label: 'Subclasses',
+                                icon: 'ì',
+                            }
+                        ]
                     },
                     {
-                        label: 'Subclasses',
-                        icon: 'pi pi-image',
-                    }
-                ]
-            },
-            {
-                label: 'Races-Subraces',
-                icon: 'pi pi-cloud',
-                items: [
-                    {
-                        label: 'Races',
-                        icon: 'pi pi-cloud-upload'
+                        label: 'Races-Subraces',
+                        icon: '',
+                        items: [
+                            {
+                                label: 'Races',
+                                icon: ''
+                            },
+                            {
+                                label: 'Subraces',
+                                icon: ''
+                            }
+                        ]
                     },
                     {
-                        label: 'Subraces',
-                        icon: 'pi pi-cloud-download'
-                    }
-                ]
-            },
-            {
-                label: 'Monster',
-                icon: 'pi pi-desktop'
-            },
-            {
-                label: 'Spells',
-                icon: 'pi pi-desktop'
-            },
-            {
-                label: 'Equipment',
-                icon: 'pi pi-desktop',
-                items: [
-                    {
-                        label: 'Equipment Category',
-                        icon: 'pi pi-desktop'
+                        label: 'Monster',
+                        icon: ''
                     },
                     {
-                        label: 'Classic Equipment',
-                        icon: 'pi pi-mobile'
+                        label: 'Spells',
+                        icon: ''
                     },
                     {
-                        label: 'Magic Item',
-                        icon: 'pi pi-tablet'
+                        label: 'Equipment',
+                        icon: '',
+                        items: [
+                            {
+                                label: 'Equipment Category',
+                                icon: ''
+                            },
+                            {
+                                label: 'Classic Equipment',
+                                icon: ''
+                            },
+                            {
+                                label: 'Magic Item',
+                                icon: ''
+                            },
+                            {
+                                label: 'Weapon Property',
+                                icon: ''
+                            }
+                        ]
                     },
                     {
-                        label: 'Weapon Property',
-                        icon: 'pi pi-tablet'
-                    }
-                ]
-            },
-            {
-                label: 'Character Data',
-                icon: 'pi pi-desktop',
-                items: [
-                    {
-                        label: 'Ability',
-                        icon: 'pi pi-mobile'
-                    },
-                    {
-                        label: 'Alignment',
-                        icon: 'pi pi-desktop'
-                    },
-                    {
-                        label: 'Background',
-                        icon: 'pi pi-tablet'
-                    },
-                    {
-                        label: 'Language',
-                        icon: 'pi pi-tablet'
-                    },
-                    {
-                        label: 'Proficiecy',
-                        icon: 'pi pi-tablet'
-                    },
-                    {
-                        label: 'Skills',
-                        icon: 'pi pi-tablet'
+                        label: 'Character Data',
+                        icon: '',
+                        items: [
+                            {
+                                label: 'Ability',
+                                icon: '',
+                                command: () => {
+                                    this.CDSRV.getData();
+                                }
+                            },
+                            {
+                                label: 'Alignment',
+                                icon: '',
+                                command: () => {
+                                    this.CDSRV.getData('alignments');
+                                }
+                            },
+                            {
+                                label: 'Background',
+                                icon: '',
+                                command: () => {
+                                    this.CDSRV.getData('backgrounds');
+                                }
+                            },
+                            {
+                                label: 'Language',
+                                icon: '',
+                                command: () => {
+                                    this.CDSRV.getData('languages');
+                                }
+                            },
+                            {
+                                label: 'Proficiency',
+                                icon: '',
+                                command: () => {
+                                    this.CDSRV.getData('proficiencies');
+                                }
+                            },
+                            {
+                                label: 'Skills',
+                                icon: '',
+                                command: () => {
+                                    this.CDSRV.getData('skills');
+                                }
+                            }
+                        ]
                     }
                 ]
             }
-        ]
+        ];
     }
 }
