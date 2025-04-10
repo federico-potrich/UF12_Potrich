@@ -20,7 +20,7 @@ export class ClassesDataServiceService {
     saving_throws: [],
     class_levels: '',
     subclasses: [],
-    spellcasting: undefined, // o null
+    spellcasting: undefined,
     url: ''
   });
   

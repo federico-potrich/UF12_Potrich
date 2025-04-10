@@ -1,14 +1,16 @@
+
 import { ClassesDataServiceService } from './../core/service/ClassesData/classes-data-service.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { PanelMenu, PanelMenuModule } from 'primeng/panelmenu';
+import { Menubar } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { CharacterDataService } from './../core/service/CharacterData/character-data.service';
+import { MonsterService } from '../core/service/monsterService/monster.service';
 
 @Component({
     selector: 'app-root',
-    imports: [ButtonModule, PanelMenuModule, PanelMenu, RouterOutlet],
+    imports: [ButtonModule, Menubar, RouterOutlet],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
@@ -18,6 +20,7 @@ export class AppComponent implements OnInit {
     readonly CDSRV = inject(CharacterDataService);
     readonly #router = inject(Router);
     readonly classesDataServiceTMP = inject(ClassesDataServiceService);
+    readonly monsterDataServiceTMP = inject(MonsterService);
     ngOnInit() {
         this.items = [
             {
@@ -57,7 +60,11 @@ export class AppComponent implements OnInit {
                     },
                     {
                         label: 'Monster',
-                        icon: ''
+                        icon: '',
+                        command: ()=>{
+                            this.monsterDataServiceTMP.getBriefData()
+                            this.#router.navigate(['/monsters'])
+                        }
                     },
                     {
                         label: 'Spells',

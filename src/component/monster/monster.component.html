@@ -1,0 +1,8 @@
+<div class="classes__container">
+    @for (monster of service.monsterDataBriefListComp(); track monster) {
+        <app-card-display [card]="monster" ></app-card-display>
+    }
+    @empty {
+        <h1>Nessun post disponibile</h1>
+    }
+</div>

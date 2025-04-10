@@ -4,5 +4,37 @@
     font-family: "MedievalSharp", cursive;
     font-weight: 400;
     font-style: normal;
-      
+    
+}
+body{
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+
+body::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('https://th.bing.com/th/id/R.14401b45992f8a14fafa8b1dbbc8cffc?rik=EG4Lq0AkOQlf9Q&riu=http%3a%2f%2f4.bp.blogspot.com%2f_uxK9p1iezm4%2fTRyKEp6XLcI%2fAAAAAAAAMKE%2fJQ1PoVeDDOk%2fs1600%2fthrough_the_ancient_valley_by_blinck-d34h5qv.jpg&ehk=nX5PR1XH%2bW2FlwKT8mZUNPg7SbjtP1HQYeUmKQSS6PA%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+    mask-image: url("../public/animation.gif");
+    mask-size: cover;
+    mask-position: center;
+}
+@keyframes animation {
+    0%{
+        transform: translateY(-50);
+        opacity: 0;
+    }
+    99%{
+    }
+    100%{
+        opacity: 1;
+    }
 }
