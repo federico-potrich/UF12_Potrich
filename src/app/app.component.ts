@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.items = [
             {
-                label: 'Menu',
+                label: 'Manual',
                 items: [
                     {
                         label: 'Classes-Subclasses',
@@ -142,6 +142,9 @@ export class AppComponent implements OnInit {
                         ]
                     }
                 ]
+            },
+            {
+                label: 'Create Character Sheet',
             }
         ];
     }

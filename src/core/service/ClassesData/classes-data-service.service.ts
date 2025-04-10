@@ -1,64 +1,150 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { ClassLevelModel, ClassModel } from '../../../model/class/_classes.model';
+import { _Generic, ClassLevelModel, ClassModel, ProficiencyChoice, Spellcasting } from '../../../model/class/_classes.model';
+import { catchError, of, retry } from 'rxjs';
+import { Router } from '@angular/router';
+import { Proficiency } from '../../../model/monster/_monster.model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ClassesDataServiceService {
-  readonly #URL = "https://www.dnd5eapi.co/api/2014";
-  readonly #http = inject(HttpClient);
-  readonly #ClassesDataBriefList = signal<Res[]>([]);
-  readonly ClassesDataListComputed = computed(() => this.#ClassesDataBriefList());
-  
-  readonly #ClassesDataCompleteList = signal<ClassModel>({
-    index: '',
-    name: '',
-    hit_die: 0,
-    proficiency_choices: [],
-    proficiencies: [],
-    saving_throws: [],
-    class_levels: '',
-    subclasses: [],
-    spellcasting: undefined,
-    url: ''
-  });
-  
-  readonly ClassesDataCompleteListComputed = computed(() => this.#ClassesDataCompleteList());
-  
-  readonly #levelledDataClassesList = signal<ClassLevelModel[]>([]);
-  readonly levelledDataClassesListComputed = computed(() => this.#levelledDataClassesList());
+    readonly #URL = "https://www.dnd5eapi.co/api/2014";
+    readonly #http = inject(HttpClient);
+    readonly #ClassesDataBriefList = signal<Res[]>([]);
+    readonly ClassesDataListComputed = computed(() => this.#ClassesDataBriefList());
+    readonly #router = inject(Router);
 
-  getBriefData() {
-    this.#http.get<ResComposed>(`${this.#URL}/classes`).subscribe((classList: ResComposed) => {
-      this.#ClassesDataBriefList.set(classList.results);
+    readonly #ClassesDataCompleteList = signal<ClassModel>({
+        index: '',
+        name: '',
+        hit_die: 0,
+        proficiency_choices: [],
+        proficiencies: [],
+        saving_throws: [],
+        class_levels: '',
+        subclasses: [],
+        spellcasting: undefined,
+        url: ''
     });
-  }
-  getCompleteData(index: string) {
-    this.#http.get<ClassModel>(`${this.#URL}/classes/${index}`).subscribe((data: ClassModel) => {
-      this.#ClassesDataCompleteList.set(data);
-    });
-  }
-  getLevelData(index: string) {
-    this.#http.get<ClassLevelModel[]>(`${this.#URL}/classes/${index}/levels`).subscribe((data: ClassLevelModel[]) => {
-      this.#levelledDataClassesList.set(data);
-    });
-  }
+
+    readonly ClassesDataCompleteListComputed = computed(() => this.#ClassesDataCompleteList());
+
+    readonly #levelledDataClassesList = signal<ClassLevelModel[]>([]);
+    readonly levelledDataClassesListComputed = computed(() => this.#levelledDataClassesList());
+    
+    readonly #CustomDataClassesList = signal<ClassModel[]>([]);
+    readonly CustomDataClassesListComputed = computed(() => this.#CustomDataClassesList());
+
+
+    getBriefData() {
+        this.#http.get<ResComposed>(`${this.#URL}/classes`).subscribe((classList: ResComposed) => {
+            let tmp = classList.results;
+
+            // Estrai solo 'index', 'name' e 'url' da CustomDataClassesListComputed
+            const customData = this.#CustomDataClassesList().map(item => ({
+                index: item.index,
+                name: item.name,
+                url: item.url
+            }));
+
+            // Unisci i due array
+            const combinedData = [...tmp, ...customData];
+
+            this.#ClassesDataBriefList.set(combinedData);
+        });
+    }
+    getCompleteData(index: string) {
+        this.#http.get<ClassModel>(`${this.#URL}/classes/${index}`).subscribe((data: ClassModel) => {
+            this.#ClassesDataCompleteList.set(data);
+        });
+    }
+    getLevelData(index: string) {
+        this.#http.get<ClassLevelModel[]>(`${this.#URL}/classes/${index}/levels`).subscribe((data: ClassLevelModel[]) => {
+            this.#levelledDataClassesList.set(data);
+        });
+    }
+
+    getCustomClass(index: string): ClassModel | undefined {
+        return this.#CustomDataClassesList().find(item => item.index === index);
+    }
+
+    createClass(
+        index: string, 
+        name: string, 
+        hit_die: number, 
+        proficiency_choices: ProficiencyChoice[], 
+        proficiencies: _Generic[],
+        saving_throws: _Generic[], 
+        class_levels: string, 
+        subclasses: _Generic[],
+        url: string,
+        spellcasting?: Spellcasting
+    ) {
+        let newPostToCreate: ClassModel = {
+            index: index,
+            name: name,
+            hit_die: hit_die,
+            proficiency_choices: proficiency_choices,
+            proficiencies: proficiencies,
+            saving_throws: saving_throws,
+            class_levels: class_levels,
+            subclasses: subclasses,
+            spellcasting: spellcasting,
+            url: url
+        };
+
+        /**
+         * questa sarebbe la richiesta
+        **/
+       
+        // this.#http.post<ClassModel>(this.#URL, newPostToCreate)
+        //     .pipe(
+        //         retry(3),
+        //         catchError((err) => {
+        //             console.error(err);
+        //             return of(null);
+        //         }),
+        //     )
+        //     .subscribe((res: ClassModel | null) => {
+        //         if (res !== null) {
+        //             this.#ClassesDataBriefList.update(() => [...this.#ClassesDataBriefList(), res]);
+        //             this.#ClassesDataCompleteList.set(res);
+        //             this.#router.navigate(['/classes']);
+        //     }
+        // });
+        if (newPostToCreate !== null) {
+            this.#ClassesDataBriefList.update(() => [...this.#ClassesDataBriefList(), {
+                index: newPostToCreate.index,
+                name: newPostToCreate.name,
+                url: newPostToCreate.url
+            }]);
+
+            this.#CustomDataClassesList.update(() => [...this.#CustomDataClassesList(), newPostToCreate]);
+            this.#ClassesDataCompleteList.set(newPostToCreate);
+            this.#router.navigate(['/classes']);
+            console.log(this.#CustomDataClassesList())
+        }
+
+    }
+    isCustom(index: string): boolean {
+        return this.#CustomDataClassesList().some(item => item.index === index);
+    }    
 }
 
 /**
  * Interfaccia per rappresentare un singolo elemento di classe.
  */
 export interface Res {
-  index: string;
-  name: string;
-  url: string;
+    index: string;
+    name: string;
+    url: string;
 }
 
 /**
  * Interfaccia per rappresentare la risposta composta dell'API.
  */
 export interface ResComposed {
-  count: number;
-  results: Res[];
+    count: number;
+    results: Res[];
 }

@@ -1,70 +1,144 @@
 @switch (fullPath) {
     @case ('classes') {
-        <div class="cardDetails">
-            <h1>Class Name: {{service.ClassesDataCompleteListComputed().name}}</h1>
-            <h2> Hit Die: {{service.ClassesDataCompleteListComputed().hit_die}}</h2>
-            <p-fieldset legend="Proficiencies">
-                @for(proficiencies of service.ClassesDataCompleteListComputed().proficiencies; track proficiencies) {
-                    <li> {{proficiencies.name}}</li>
-                }
-                @empty{
-                    <h1>no data</h1>
-                }
-            </p-fieldset>
+        @if(!isCustom()){
+            <div class="cardDetails">
+                <h1>Class Name: {{service.ClassesDataCompleteListComputed().name}}</h1>
+                <h2> Hit Die: {{service.ClassesDataCompleteListComputed().hit_die}}</h2>
+                <p-fieldset legend="Proficiencies">
+                    @for(proficiencies of service.ClassesDataCompleteListComputed().proficiencies; track proficiencies) {
+                        <li> {{proficiencies.name}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+                
+                <p-fieldset legend="Proficiencies Choices" >
+                    @for(proficiency_choices of service.ClassesDataCompleteListComputed().proficiency_choices; track proficiency_choices) {
+                        <li><u>Choose</u>: {{proficiency_choices.choose}}; &nbsp;&nbsp;&nbsp;&nbsp;  <u>Description</u>: {{proficiency_choices.desc}}&nbsp;&nbsp;&nbsp;&nbsp; <u>Type</u>: {{proficiency_choices.type}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
             
-            <p-fieldset legend="Proficiencies Choices" >
-                @for(proficiency_choices of service.ClassesDataCompleteListComputed().proficiency_choices; track proficiency_choices) {
-                    <li><u>Choose</u>: {{proficiency_choices.choose}}; &nbsp;&nbsp;&nbsp;&nbsp;  <u>Description</u>: {{proficiency_choices.desc}}&nbsp;&nbsp;&nbsp;&nbsp; <u>Type</u>: {{proficiency_choices.type}}</li>
-                }
-                @empty{
-                    <h1>no data</h1>
-                }
-            </p-fieldset>
-        
-            <p-fieldset legend="Saving Throws" >
-                @for(saving_throws of service.ClassesDataCompleteListComputed().saving_throws; track saving_throws) {
-                    <li> {{saving_throws.name}}</li>
-                }
-                @empty{
-                    <h1>no data</h1>
-                }
-            </p-fieldset>
-        
-            <p-fieldset legend="Subclasses" >
-                @for(subclasses of service.ClassesDataCompleteListComputed().subclasses; track subclasses) {
-                    <li> {{subclasses.name}}</li>
-                }
-                @empty{
-                    <h1>no data</h1>
-                }
-            </p-fieldset>
-        
-            <h2>Levelling:</h2>
-            <p-accordion value="0">
-                @for(level of service.levelledDataClassesListComputed(); track level.level) {
-                    <p-accordion-panel value="{{level.level}}">
-                        <p-accordion-header>Level {{level.level}}</p-accordion-header>
-                        <p-accordion-content>
-                            <p class="m-0">
-                                <p-fieldset legend="Features" >
-                                    @for(feature of level.features; track feature) {
-                                        <li> {{feature.name}}</li>
-                                    }
-                                    @empty{
-                                        <h1>no data</h1>
-                                    }
-                                </p-fieldset>
-                            </p>
-                            <h3>Proficiency bonus: {{level.prof_bonus}}</h3>
-                        </p-accordion-content>
-                    </p-accordion-panel>
-                }
-                @empty{
-                    <h1>no data</h1>
-                }
-            </p-accordion>
-        
-        </div>
+                <p-fieldset legend="Saving Throws" >
+                    @for(saving_throws of service.ClassesDataCompleteListComputed().saving_throws; track saving_throws) {
+                        <li> {{saving_throws.name}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+            
+                <p-fieldset legend="Subclasses" >
+                    @for(subclasses of service.ClassesDataCompleteListComputed().subclasses; track subclasses) {
+                        <li> {{subclasses.name}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+            
+                <h2>Levelling:</h2>
+                <p-accordion value="0">
+                    @for(level of service.levelledDataClassesListComputed(); track level.level) {
+                        <p-accordion-panel value="{{level.level}}">
+                            <p-accordion-header>Level {{level.level}}</p-accordion-header>
+                            <p-accordion-content>
+                                <p class="m-0">
+                                    <p-fieldset legend="Features" >
+                                        @for(feature of level.features; track feature) {
+                                            <li> {{feature.name}}</li>
+                                        }
+                                        @empty{
+                                            <h1>no data</h1>
+                                        }
+                                    </p-fieldset>
+                                </p>
+                                <h3>Proficiency bonus: {{level.prof_bonus}}</h3>
+                            </p-accordion-content>
+                        </p-accordion-panel>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-accordion>
+            
+            </div>
+        }
+        @else {
+            <div class="cardDetails">
+                <h1>Class Name: {{this.customClass?.name}}</h1>
+                <h2> Hit Die: {{service.ClassesDataCompleteListComputed().hit_die}}</h2>
+                <p-fieldset legend="Proficiencies">
+                    @for(proficiencies of service.ClassesDataCompleteListComputed().proficiencies; track proficiencies) {
+                        <li> {{proficiencies.name}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+                
+                <p-fieldset legend="Proficiencies Choices" >
+                    @for(proficiency_choices of service.ClassesDataCompleteListComputed().proficiency_choices; track proficiency_choices) {
+                        <li><u>Choose</u>: {{proficiency_choices.choose}}; &nbsp;&nbsp;&nbsp;&nbsp;  <u>Description</u>: {{proficiency_choices.desc}}&nbsp;&nbsp;&nbsp;&nbsp; <u>Type</u>: {{proficiency_choices.type}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+            
+                <p-fieldset legend="Saving Throws" >
+                    @for(saving_throws of service.ClassesDataCompleteListComputed().saving_throws; track saving_throws) {
+                        <li> {{saving_throws.name}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+            
+                <p-fieldset legend="Subclasses" >
+                    @for(subclasses of service.ClassesDataCompleteListComputed().subclasses; track subclasses) {
+                        <li> {{subclasses.name}}</li>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-fieldset>
+            
+                <h2>Levelling:</h2>
+                <p-accordion value="0">
+                    @for(level of service.levelledDataClassesListComputed(); track level.level) {
+                        <p-accordion-panel value="{{level.level}}">
+                            <p-accordion-header>Level {{level.level}}</p-accordion-header>
+                            <p-accordion-content>
+                                <p class="m-0">
+                                    <p-fieldset legend="Features" >
+                                        @for(feature of level.features; track feature) {
+                                            <li> {{feature.name}}</li>
+                                        }
+                                        @empty{
+                                            <h1>no data</h1>
+                                        }
+                                    </p-fieldset>
+                                </p>
+                                <h3>Proficiency bonus: {{level.prof_bonus}}</h3>
+                            </p-accordion-content>
+                        </p-accordion-panel>
+                    }
+                    @empty{
+                        <h1>no data</h1>
+                    }
+                </p-accordion>
+                <p-toolbar>
+                    <ng-template #start>
+                        <p-button icon="pi pi-pencil" class="mr-2" text severity="secondary"/>
+                        <p-button icon="pi pi-trash" class="mr-2" text severity="secondary" />
+                    </ng-template>
+                </p-toolbar>
+            </div>
+        }
     }
     @case('monsters'){
         <div class="cardDetails">

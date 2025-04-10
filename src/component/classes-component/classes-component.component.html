@@ -5,4 +5,11 @@
     @empty {
         <h1>Nessun post disponibile</h1>
     }
+    <p-toolbar>
+        <ng-template #start>
+            <p-button icon="pi pi-plus" class="mr-2" text severity="secondary" (onClick)="post()"/>
+            <p-button icon="pi pi-lock" class="mr-2" text severity="secondary" />
+            <p-button icon="pi pi-lock-open" class="mr-2" text severity="secondary" />
+        </ng-template>
+    </p-toolbar>
 </div>

@@ -6,11 +6,13 @@ import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { AccordionModule } from 'primeng/accordion';
 import { MonsterService } from '../../core/service/monsterService/monster.service';
+import { ClassModel } from '../../model/class/_classes.model';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, ButtonModule, AccordionModule ,FieldsetModule],
+  imports: [CommonModule, ButtonModule, AccordionModule ,FieldsetModule, ToolbarModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -21,18 +23,22 @@ export class DetailsComponent {
   readonly monster = this.serviceMonster.monsterDataCompleteListComp()
 
   fullPath : any;
+  customClass: ClassModel | undefined;
   
   constructor() {
     const urlSegments = this.#route.snapshot.url;
     const _Index = this.#route.snapshot.params['index'];
     this.fullPath = urlSegments.map(segment => segment.path)[0];
-
-    console.log(this.fullPath)
+    
     
     switch (this.fullPath) {
       case 'classes':
-        this.service.getCompleteData(_Index);
-        this.service.getLevelData(_Index);
+        if(!this.isCustom()){
+          this.service.getCompleteData(_Index);
+          this.service.getLevelData(_Index);
+        }else{
+          this.customClass = this.service.getCustomClass(_Index)
+        }
         break;
       case 'monsters':
         this.serviceMonster.getCompleteData(_Index);
@@ -40,5 +46,8 @@ export class DetailsComponent {
       default:
         break;
     }
+  }
+  isCustom(){
+    return this.service.isCustom(this.#route.snapshot.params['index'])
   }
 }

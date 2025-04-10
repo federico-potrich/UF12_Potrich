@@ -1,0 +1,25 @@
+@switch(category){
+    @case('classes'){
+        <p-floatlabel variant="on">
+            <input pInputText id="on_label" [(ngModel)]="index" autocomplete="off" />
+            <label for="on_label">Index</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on">
+            <input pInputText id="on_label" [(ngModel)]="name" autocomplete="off" />
+            <label for="on_label">Name</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on">
+            <input pInputText id="on_label" type="number" [(ngModel)]="hit_die" autocomplete="off" />
+            <label for="on_label">Hit Die</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on">
+            <input pInputText id="on_label" [(ngModel)]="class_levels" autocomplete="off" />
+            <label for="on_label">Class Level</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on">
+            <input pInputText id="on_label" [(ngModel)]="url" autocomplete="off" />
+            <label for="on_label">URL</label>
+        </p-floatlabel>
+        <p-button label="Submit"  severity="success" (click)="post()"/>
+    }
+}

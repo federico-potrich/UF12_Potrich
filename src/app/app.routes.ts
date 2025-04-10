@@ -1,9 +1,12 @@
+
 import { Routes } from '@angular/router';
 import { CharacterDataComponent } from '../component/character-data/character-data.component';
 import { ClassesComponentComponent } from '../component/classes-component/classes-component.component';
 import { HomePageComponent } from '../component/home-page/home-page.component';
 import { DetailsComponent } from '../component/details/details.component';
 import { MonsterComponent } from '../component/monster/monster.component';
+import { NotFoundError } from 'rxjs';
+import { PostNewItemComponent } from '../feature/post-new-item/post-new-item.component';
 
 export const routes: Routes = [
     {
@@ -31,7 +34,12 @@ export const routes: Routes = [
         component: DetailsComponent
     },
     {
+        path: 'post/:category',
+        component: PostNewItemComponent
+    },
+    {
         path: '**',
-        component: HomePageComponent
+        component: NotFoundError,
+        pathMatch: 'full'
     }
 ];

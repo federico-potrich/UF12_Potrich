@@ -6,4 +6,9 @@
         margin: 0;
     }
     backdrop-filter: blur(10px);
+    p-toolbar{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+    }
 }
