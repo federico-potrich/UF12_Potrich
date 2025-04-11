@@ -7,12 +7,9 @@ import { DetailsComponent } from '../component/details/details.component';
 import { MonsterComponent } from '../component/monster/monster.component';
 import { NotFoundError } from 'rxjs';
 import { PostNewItemComponent } from '../feature/post-new-item/post-new-item.component';
+import { NotFoundComponent } from '../component/not-found/not-found.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: HomePageComponent
-    },
     {
         path: 'character',
         component: CharacterDataComponent
@@ -38,8 +35,12 @@ export const routes: Routes = [
         component: PostNewItemComponent
     },
     {
+        path: '',
+        component: HomePageComponent
+    },
+    {
         path: '**',
-        component: NotFoundError,
+        component: NotFoundComponent,
         pathMatch: 'full'
     }
 ];

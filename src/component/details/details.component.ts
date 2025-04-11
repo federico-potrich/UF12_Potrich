@@ -17,6 +17,12 @@ import { ToolbarModule } from 'primeng/toolbar';
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent {
+  delete() {
+    this.service.deleteClass(this.#route.snapshot.params['index'])
+  }
+  modify() {
+    
+  }
   readonly #route: ActivatedRoute = inject(ActivatedRoute);
   readonly service = inject(ClassesDataServiceService);
   readonly serviceMonster = inject(MonsterService);

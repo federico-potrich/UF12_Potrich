@@ -127,6 +127,85 @@ export class ClassesDataServiceService {
         }
 
     }
+    modifyClass(
+        index: string, 
+        name: string, 
+        hit_die: number, 
+        proficiency_choices: ProficiencyChoice[], 
+        proficiencies: _Generic[], 
+        saving_throws: _Generic[], 
+        class_levels: string, 
+        subclasses: _Generic[], 
+        url: string, 
+        spellcasting?: Spellcasting
+    ) {
+        let postUpdate: ClassModel = {
+            index: index,
+            name: name,
+            hit_die: hit_die,
+            proficiency_choices: proficiency_choices,
+            proficiencies: proficiencies,
+            saving_throws: saving_throws,
+            class_levels: class_levels,
+            subclasses: subclasses,
+            spellcasting: spellcasting,
+            url: url
+        };
+    
+        // Aggiornare il Brief List
+        this.#ClassesDataBriefList.update(() => 
+            this.#ClassesDataBriefList().map(item => 
+                item.index === index ? { ...item, ...postUpdate } : item
+            )
+        );
+    
+        // Aggiornare la lista Custom
+        this.#CustomDataClassesList.update(() => 
+            this.#CustomDataClassesList().map(item => 
+                item.index === index ? { ...item, ...postUpdate } : item
+            )
+        );
+    
+        // Aggiornare la lista completa
+        this.#ClassesDataCompleteList.set(postUpdate);
+        
+        // Naviga alla pagina delle classi
+        this.#router.navigate(['/classes']);
+    
+        console.log(this.#CustomDataClassesList());
+    }
+    
+    deleteClass(index: string) {
+        // Rimuovi dalla lista dei brief
+        this.#ClassesDataBriefList.update(() => 
+            this.#ClassesDataBriefList().filter(item => item.index !== index)
+        );
+    
+        // Rimuovi dalla lista custom
+        this.#CustomDataClassesList.update(() => 
+            this.#CustomDataClassesList().filter(item => item.index !== index)
+        );
+    
+        // Rimuovi dalla lista completa
+        if (this.#ClassesDataCompleteList().index === index) {
+            this.#ClassesDataCompleteList.set({
+                index: '',
+                name: '',
+                hit_die: 0,
+                proficiency_choices: [],
+                proficiencies: [],
+                saving_throws: [],
+                class_levels: '',
+                subclasses: [],
+                spellcasting: undefined,
+                url: ''
+            });
+        }
+        this.#router.navigate(['/classes']);
+
+    }
+    
+
     isCustom(index: string): boolean {
         return this.#CustomDataClassesList().some(item => item.index === index);
     }    

@@ -133,8 +133,8 @@
                 </p-accordion>
                 <p-toolbar>
                     <ng-template #start>
-                        <p-button icon="pi pi-pencil" class="mr-2" text severity="secondary"/>
-                        <p-button icon="pi pi-trash" class="mr-2" text severity="secondary" />
+                        <p-button icon="pi pi-pencil" class="mr-2" text severity="secondary" (onClick)="modify()"/>
+                        <p-button icon="pi pi-trash" class="mr-2" text severity="secondary" (onClick)="delete()"/>
                     </ng-template>
                 </p-toolbar>
             </div>
