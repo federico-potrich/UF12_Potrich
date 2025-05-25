@@ -1,8 +1,0 @@
-<div class="classes__container">
-    @for (classes of classesDataService.ClassesDataListComputed(); track classes) {
-        <app-card [cardName]="classes.name" [id]="classes.index"></app-card>
-    }
-    @empty {
-        <h1>Nessun post disponibile</h1>
-    }
-</div>

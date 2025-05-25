@@ -1,4 +1,4 @@
-import { ClassesDataServiceService } from './../../core/service/ClassesData/classes-data-service.service';
+import { ClassesDataServiceService } from '../../service/ClassesData/classes-data-service.service';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';

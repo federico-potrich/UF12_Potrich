@@ -1,5 +1,5 @@
-import { CardComponent } from '../../core/components/card/card.component';
-import { MonsterService } from './../../core/service/monsterService/monster.service';
+import { CardComponent } from '../card/card.component';
+import { MonsterService } from '../../service/monsterService/monster.service';
 import { Component, inject } from '@angular/core';
 
 @Component({

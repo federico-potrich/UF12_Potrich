@@ -1,1 +1,8 @@
-<p>backgrounds works!</p>
+<div class="container">
+    @for (item of this.service.CharacterDataListComputed().results; track $index) {
+        <app-card [cardName]="item.name"></app-card>
+    }
+    @empty{
+        <h1>No ability score</h1>
+    }
+</div>

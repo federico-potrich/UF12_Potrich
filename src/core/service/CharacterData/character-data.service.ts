@@ -9,11 +9,14 @@ export class CharacterDataService {
   readonly #http = inject(HttpClient);
   readonly #CharacterDataList = signal<any>([]);
   readonly CharacterDataListComputed = computed(() => this.#CharacterDataList());
+  
   constructor() { }
   
+
+
   getData(suffix: CharacterValue ='ability-scores'){
     this.#http.get<any>(this.#URL+suffix).subscribe(el=>{
-      console.log(el)
+      this.#CharacterDataList.set(el)
     })
   }
 }

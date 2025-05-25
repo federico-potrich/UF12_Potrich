@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { CharacterValue } from './../../../service/CharacterData/character-data.service';
+import { Component, inject } from '@angular/core';
+import { CharacterDataService } from '../../../service/CharacterData/character-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { CardComponent } from '../../card/card.component';
 
 @Component({
   selector: 'app-backgrounds',
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './backgrounds.component.html',
-  styleUrl: './backgrounds.component.scss'
+  styleUrl: '../common.scss'
 })
 export class BackgroundsComponent {
-
+  service = inject(CharacterDataService)
+  router = inject(ActivatedRoute)
+  constructor(){
+    this.service.getData(this.router.snapshot.url[0].path as (CharacterValue))
+  }
 }

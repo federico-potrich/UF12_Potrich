@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
                                 label: 'Ability',
                                 icon: '',
                                 command: () => {
-                                    this.#router.navigate(['/character'])
+                                    this.#router.navigate(['view/character/ability-scores'])
                                     this.CDSRV.getData('ability-scores');
                                 }
                             },
@@ -110,6 +110,7 @@ export class AppComponent implements OnInit {
                                 label: 'Alignment',
                                 icon: '',
                                 command: () => {
+                                    this.#router.navigate(['view/character/alignments'])
                                     this.CDSRV.getData('alignments');
                                 }
                             },
@@ -117,6 +118,7 @@ export class AppComponent implements OnInit {
                                 label: 'Background',
                                 icon: '',
                                 command: () => {
+                                    this.#router.navigate(['/view/character/backgrounds'])
                                     this.CDSRV.getData('backgrounds');
                                 }
                             },
@@ -124,6 +126,7 @@ export class AppComponent implements OnInit {
                                 label: 'Language',
                                 icon: '',
                                 command: () => {
+                                    this.#router.navigate(['/view/character/languages'])
                                     this.CDSRV.getData('languages');
                                 }
                             },
@@ -131,6 +134,7 @@ export class AppComponent implements OnInit {
                                 label: 'Proficiency',
                                 icon: '',
                                 command: () => {
+                                    this.#router.navigate(['/view/character/proficiencies'])
                                     this.CDSRV.getData('proficiencies');
                                 }
                             },
@@ -138,6 +142,7 @@ export class AppComponent implements OnInit {
                                 label: 'Skills',
                                 icon: '',
                                 command: () => {
+                                    this.#router.navigate(['/view/character/skills'])
                                     this.CDSRV.getData('skills');
                                 }
                             }

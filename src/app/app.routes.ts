@@ -1,13 +1,19 @@
-import { PostNewItemComponent } from './../core/post-new-item/post-new-item.component';
+import { PostNewItemComponent } from '../core/feature/post-new-item/post-new-item.component';
 
 import { Routes } from '@angular/router';
-import { CharacterDataComponent } from '../component/character-data/character-data.component';
-import { ClassesComponentComponent } from '../component/classes-component/classes-component.component';
-import { HomePageComponent } from '../component/home-page/home-page.component';
-import { DetailsComponent } from '../component/details/details.component';
-import { MonsterComponent } from '../component/monster/monster.component';
-import { NotFoundComponent } from '../component/not-found/not-found.component';
+import { CharacterDataComponent } from '../core/components/character-data/character-data.component';
+import { ClassesComponentComponent } from '../core/components/classes-component/classes-component.component';
+import { HomePageComponent } from '../core/components/home-page/home-page.component';
+import { DetailsComponent } from '../core/components/details/details.component';
+import { MonsterComponent } from '../core/components/monster/monster.component';
+import { NotFoundComponent } from '../core/components/not-found/not-found.component';
 import { GeneralDisplayCardComponent } from '../core/components/general-display-card/general-display-card.component';
+import { AbilityScoresComponent } from '../core/components/character/ability-scores/ability-scores.component';
+import { AlignmentsComponent } from '../core/components/character/alignments/alignments.component';
+import { BackgroundsComponent } from '../core/components/character/backgrounds/backgrounds.component';
+import { LanguagesComponent } from '../core/components/character/languages/languages.component';
+import { ProficienciesComponent } from '../core/components/character/proficiencies/proficiencies.component';
+import { SkillsComponent } from '../core/components/character/skills/skills.component';
 
 export const routes: Routes = [
     {
@@ -38,10 +44,9 @@ export const routes: Routes = [
                     { path: 'languages', component: LanguagesComponent },
                     { path: 'proficiencies', component: ProficienciesComponent },
                     { path: 'skills', component: SkillsComponent },
-                    { path: '', redirectTo: 'ability-scores', pathMatch: 'full' } // redirect di default
+                    { path: '', redirectTo: 'ability-scores', pathMatch: 'full' }
                 ]
-            }
-
+            },
             {
                 path: 'monsters', component: MonsterComponent,
                 children: [
@@ -54,7 +59,7 @@ export const routes: Routes = [
             // { path: 'equipment', component: EquipmentComponent },
             // { path: 'races', component: RacesComponent },
             // { path: 'spells', component: SpellsComponent },
-            { path: ':type/:index', component: DetailsComponent }, // opzionale
+            { path: ':type/:index', component: DetailsComponent } //da rivedere
         ]
     },
     {
@@ -67,7 +72,6 @@ export const routes: Routes = [
             // { path: 'equipment', component: EquipmentComponent },
             // { path: 'races', component: RacesComponent },
             // { path: 'spells', component: SpellsComponent },
-            { path: ':type/:index', component: DetailsComponent }, // opzionale
         ]
     },
     {
@@ -80,7 +84,6 @@ export const routes: Routes = [
             // { path: 'equipment', component: EquipmentComponent },
             // { path: 'races', component: RacesComponent },
             // { path: 'spells', component: SpellsComponent },
-            { path: ':type/:index', component: DetailsComponent }, // opzionale
         ]
     },
     {
@@ -93,7 +96,6 @@ export const routes: Routes = [
             // { path: 'equipment', component: EquipmentComponent },
             // { path: 'races', component: RacesComponent },
             // { path: 'spells', component: SpellsComponent },
-            { path: ':type/:index', component: DetailsComponent }, // opzionale
         ]
     },
     {

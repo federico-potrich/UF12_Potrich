@@ -1,12 +1,12 @@
-import { ClassesDataServiceService } from './../../core/service/ClassesData/classes-data-service.service';
+import { ClassesDataServiceService } from '../../service/ClassesData/classes-data-service.service';
 import { Component, inject, effect, Signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { AccordionModule } from 'primeng/accordion';
-import { MonsterService } from '../../core/service/monsterService/monster.service';
-import { ClassModel } from '../../model/class/_classes.model';
+import { MonsterService } from '../../service/monsterService/monster.service';
+import { ClassModel } from '../../../model/class/_classes.model';
 import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({

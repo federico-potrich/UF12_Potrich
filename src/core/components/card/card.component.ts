@@ -9,5 +9,5 @@ import { RouterLink } from '@angular/router';
 })
 export class CardComponent {
   cardName = input.required<string>()
-  id = input.required<string>()
+  id = input<string>()
 }
