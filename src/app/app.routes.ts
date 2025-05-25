@@ -11,6 +11,11 @@ import { NotFoundComponent } from '../component/not-found/not-found.component';
 
 export const routes: Routes = [
     {
+        path: '',
+        component: HomePageComponent,
+        pathMatch: 'full'
+    },
+    {
         path: 'character',
         component: CharacterDataComponent
     },
@@ -35,12 +40,7 @@ export const routes: Routes = [
         component: PostNewItemComponent
     },
     {
-        path: '',
-        component: HomePageComponent
-    },
-    {
         path: '**',
         component: NotFoundComponent,
-        pathMatch: 'full'
-    }
+    },
 ];

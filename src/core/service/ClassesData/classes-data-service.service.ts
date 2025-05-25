@@ -94,25 +94,6 @@ export class ClassesDataServiceService {
             url: url
         };
 
-        /**
-         * questa sarebbe la richiesta
-        **/
-       
-        // this.#http.post<ClassModel>(this.#URL, newPostToCreate)
-        //     .pipe(
-        //         retry(3),
-        //         catchError((err) => {
-        //             console.error(err);
-        //             return of(null);
-        //         }),
-        //     )
-        //     .subscribe((res: ClassModel | null) => {
-        //         if (res !== null) {
-        //             this.#ClassesDataBriefList.update(() => [...this.#ClassesDataBriefList(), res]);
-        //             this.#ClassesDataCompleteList.set(res);
-        //             this.#router.navigate(['/classes']);
-        //     }
-        // });
         if (newPostToCreate !== null) {
             this.#ClassesDataBriefList.update(() => [...this.#ClassesDataBriefList(), {
                 index: newPostToCreate.index,

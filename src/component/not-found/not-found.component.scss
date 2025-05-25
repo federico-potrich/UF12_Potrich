@@ -1,0 +1,16 @@
+.container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    img{
+        width: 25rem;
+        cursor: pointer;
+        transition: 1s ease;
+    }
+    img:hover{
+        scale: (1.2);
+    }
+}
