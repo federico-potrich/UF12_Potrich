@@ -19,8 +19,10 @@ export class AppComponent implements OnInit {
 
     readonly CDSRV = inject(CharacterDataService);
     readonly #router = inject(Router);
+    
     readonly classesDataServiceTMP = inject(ClassesDataServiceService);
     readonly monsterDataServiceTMP = inject(MonsterService);
+
     ngOnInit() {
         this.items = [
             {
@@ -34,7 +36,7 @@ export class AppComponent implements OnInit {
                                 label: 'Classes',
                                 icon: 'ì',
                                 command: ()=>{
-                                    this.#router.navigate(['/classes'])
+                                    this.#router.navigate(['/view/classes'])
                                     this.classesDataServiceTMP.getBriefData()
                                 }
                             },
@@ -63,7 +65,7 @@ export class AppComponent implements OnInit {
                         icon: '',
                         command: ()=>{
                             this.monsterDataServiceTMP.getBriefData()
-                            this.#router.navigate(['/monsters'])
+                            this.#router.navigate(['/view/monsters'])
                         }
                     },
                     {
