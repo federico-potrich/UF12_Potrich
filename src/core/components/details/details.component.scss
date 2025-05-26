@@ -7,8 +7,8 @@
     }
     backdrop-filter: blur(10px);
     p-toolbar{
-        position: fixed;
-        left: 0;
-        bottom: 0;
+        position: absolute;
+        left: 0%;
+        bottom: -20%;
     }
 }

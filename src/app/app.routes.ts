@@ -1,4 +1,4 @@
-import { PostNewItemComponent } from '../core/feature/post-new-item/post-new-item.component';
+import { PostNewItemComponent } from './../core/feature/post-new-item/post-new-item.component';
 
 import { Routes } from '@angular/router';
 import { CharacterDataComponent } from '../core/components/character-data/character-data.component';
@@ -14,6 +14,8 @@ import { BackgroundsComponent } from '../core/components/character/backgrounds/b
 import { LanguagesComponent } from '../core/components/character/languages/languages.component';
 import { ProficienciesComponent } from '../core/components/character/proficiencies/proficiencies.component';
 import { SkillsComponent } from '../core/components/character/skills/skills.component';
+import { EquipmentPageComponent } from '../core/components/equipment-page/equipment-page.component';
+import { EditPostComponent } from '../core/feature/edit-post/edit-post.component';
 
 export const routes: Routes = [
     {
@@ -27,12 +29,6 @@ export const routes: Routes = [
         children: [
             {
                 path: 'classes', component: ClassesComponentComponent,
-                children: [
-                    {
-                        path: 'classes/:index',
-                        component: DetailsComponent
-                    },
-                ]
             },
             {
                 path: 'character',
@@ -56,7 +52,10 @@ export const routes: Routes = [
                     },
                 ]
             },
-            // { path: 'equipment', component: EquipmentComponent },
+            {
+                path: 'equipment/:index',
+                component: EquipmentPageComponent
+            },
             // { path: 'races', component: RacesComponent },
             // { path: 'spells', component: SpellsComponent },
             { path: ':type/:index', component: DetailsComponent } //da rivedere
@@ -66,24 +65,14 @@ export const routes: Routes = [
         path: 'edit',
         component: GeneralDisplayCardComponent,
         children: [
-            { path: 'classes', component: ClassesComponentComponent },
-            { path: 'character', component: CharacterDataComponent },
-            { path: 'monsters', component: MonsterComponent },
-            // { path: 'equipment', component: EquipmentComponent },
-            // { path: 'races', component: RacesComponent },
-            // { path: 'spells', component: SpellsComponent },
+            { path: ':category/:index', component: EditPostComponent },
         ]
     },
     {
         path: 'post',
         component: GeneralDisplayCardComponent,
         children: [
-            { path: 'classes', component: ClassesComponentComponent },
-            { path: 'character', component: CharacterDataComponent },
-            { path: 'monsters', component: MonsterComponent },
-            // { path: 'equipment', component: EquipmentComponent },
-            // { path: 'races', component: RacesComponent },
-            // { path: 'spells', component: SpellsComponent },
+            { path: ':category', component: PostNewItemComponent },
         ]
     },
     {
@@ -91,26 +80,12 @@ export const routes: Routes = [
         component: GeneralDisplayCardComponent,
         children: [
             { path: 'classes', component: ClassesComponentComponent },
-            { path: 'character', component: CharacterDataComponent },
-            { path: 'monsters', component: MonsterComponent },
-            // { path: 'equipment', component: EquipmentComponent },
-            // { path: 'races', component: RacesComponent },
-            // { path: 'spells', component: SpellsComponent },
         ]
     },
     {
         path: 'character',
         component: CharacterDataComponent
     },
-    {
-        path: 'monsters',
-        component: MonsterComponent
-    },
-    {
-        path: 'monsters/:index',
-        component: DetailsComponent
-    },
-
     {
         path: 'post/:category',
         component: PostNewItemComponent

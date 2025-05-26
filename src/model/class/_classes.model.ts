@@ -15,7 +15,7 @@ export interface ProficiencyChoice {
   desc : string;
   choose: number;
   type: string;
-  from: _Generic;
+  from?: _Generic;
 }
 
 export interface APIReference {

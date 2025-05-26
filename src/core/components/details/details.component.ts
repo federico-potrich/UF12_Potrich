@@ -1,6 +1,6 @@
 import { ClassesDataServiceService } from '../../service/ClassesData/classes-data-service.service';
 import { Component, inject, effect, Signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -17,13 +17,17 @@ import { ToolbarModule } from 'primeng/toolbar';
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent {
+  readonly #router = inject(Router)
+  readonly #route: ActivatedRoute = inject(ActivatedRoute);
   delete() {
     this.service.deleteClass(this.#route.snapshot.params['index'])
   }
   modify() {
-    
+    const _Index = this.#route.snapshot.params['index'];
+    const urlSegments = this.#route.snapshot.url;
+    this.fullPath = urlSegments.map(segment => segment.path)[0];
+    this.#router.navigate([`/edit/${this.fullPath}/${_Index}`])
   }
-  readonly #route: ActivatedRoute = inject(ActivatedRoute);
   readonly service = inject(ClassesDataServiceService);
   readonly serviceMonster = inject(MonsterService);
   readonly monster = this.serviceMonster.monsterDataCompleteListComp()
@@ -32,10 +36,10 @@ export class DetailsComponent {
   customClass: ClassModel | undefined;
   
   constructor() {
+    
     const urlSegments = this.#route.snapshot.url;
     const _Index = this.#route.snapshot.params['index'];
     this.fullPath = urlSegments.map(segment => segment.path)[0];
-    
     
     switch (this.fullPath) {
       case 'classes':

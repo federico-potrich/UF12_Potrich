@@ -1,0 +1,24 @@
+.class-form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    align-items: center;
+    height: 80vh;
+
+    p-floatlabel input{
+        width: 100%;
+    }
+    span{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .choice{
+        gap: 20px;
+        p-floatlabel{
+            display: flex;
+            gap: 5px;
+        }
+    }
+}

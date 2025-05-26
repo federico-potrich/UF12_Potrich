@@ -7,6 +7,7 @@ import { Menubar } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { CharacterDataService } from './../core/service/CharacterData/character-data.service';
 import { MonsterService } from '../core/service/monsterService/monster.service';
+import { EquipmentService } from '../core/service/equipment/equipment.service';
 
 @Component({
     selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     items: MenuItem[] | undefined;
 
     readonly CDSRV = inject(CharacterDataService);
+    readonly ESRV = inject(EquipmentService)
     readonly #router = inject(Router);
     
     readonly classesDataServiceTMP = inject(ClassesDataServiceService);
@@ -78,19 +80,35 @@ export class AppComponent implements OnInit {
                         items: [
                             {
                                 label: 'Equipment Category',
-                                icon: ''
+                                icon: '',
+                                command: () => {
+                                    this.#router.navigate(['view/equipment/equipment-categories'])
+                                    this.ESRV.getData('equipment-categories');
+                                }
                             },
                             {
                                 label: 'Classic Equipment',
-                                icon: ''
+                                icon: '',
+                                command: () => {
+                                    this.#router.navigate(['view/equipment/equipment'])
+                                    this.ESRV.getData('equipment');
+                                }
                             },
                             {
                                 label: 'Magic Item',
-                                icon: ''
+                                icon: '',
+                                command: () => {
+                                    this.#router.navigate(['view/equipment/magic-items'])
+                                    this.ESRV.getData('magic-items');
+                                }
                             },
                             {
                                 label: 'Weapon Property',
-                                icon: ''
+                                icon: '',
+                                command: () => {
+                                    this.#router.navigate(['view/equipment/weapon-properties'])
+                                    this.ESRV.getData('weapon-properties');
+                                }
                             }
                         ]
                     },

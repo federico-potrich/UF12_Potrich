@@ -106,6 +106,7 @@ export class ClassesDataServiceService {
             this.#router.navigate(['/classes']);
             console.log(this.#CustomDataClassesList())
         }
+        this.#router.navigate(['/view/classes']);
 
     }
     modifyClass(
@@ -133,27 +134,22 @@ export class ClassesDataServiceService {
             url: url
         };
     
-        // Aggiornare il Brief List
-        this.#ClassesDataBriefList.update(() => 
-            this.#ClassesDataBriefList().map(item => 
-                item.index === index ? { ...item, ...postUpdate } : item
-            )
-        );
-    
-        // Aggiornare la lista Custom
-        this.#CustomDataClassesList.update(() => 
-            this.#CustomDataClassesList().map(item => 
-                item.index === index ? { ...item, ...postUpdate } : item
-            )
-        );
-    
-        // Aggiornare la lista completa
-        this.#ClassesDataCompleteList.set(postUpdate);
-        
+        // Aggiorna la lista custom
+        // this.#CustomDataClassesList.update(() =>
+        //     this.#CustomDataClassesList().map(item =>
+        //         item.index === index ? { ...item, ...postUpdate } : item
+        //     )
+        // );
+        console.log(this.#CustomDataClassesList())
+        console.log(postUpdate.index)
+        let oldPost = this.#CustomDataClassesList().find((post) => post.index === postUpdate.index);
+        if(oldPost === undefined) throw new Error("Post non trovato");
+
+
+        let oldPostIndex = this.#CustomDataClassesList().indexOf(oldPost);
+        this.#CustomDataClassesList()[oldPostIndex] = postUpdate
         // Naviga alla pagina delle classi
-        this.#router.navigate(['/classes']);
-    
-        console.log(this.#CustomDataClassesList());
+        this.#router.navigate(['view/classes']);
     }
     
     deleteClass(index: string) {
@@ -182,7 +178,7 @@ export class ClassesDataServiceService {
                 url: ''
             });
         }
-        this.#router.navigate(['/classes']);
+        this.#router.navigate(['/view/classes']);
 
     }
     

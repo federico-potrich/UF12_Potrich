@@ -1,0 +1,83 @@
+@switch(category){
+    @case('classes'){
+    <div class="class-form">
+
+        <!-- Name -->
+        <p-floatlabel>
+            <input pInputText id="name" [(ngModel)]="name" name="name" autocomplete="off" />
+            <label for="name">Name</label>
+        </p-floatlabel>
+
+        <!-- Hit Die -->
+        <p-floatlabel>
+            <input pInputText id="hit_die" type="number" [(ngModel)]="hit_die" name="hit_die" autocomplete="off" />
+            <!-- <label for="hit_die">Hit Die</label> -->
+        </p-floatlabel>
+
+        <!-- Class Levels -->
+        <p-floatlabel>
+            <input pInputText id="class_levels" [(ngModel)]="class_levels" name="class_levels" autocomplete="off" />
+            <label for="class_levels">Class Levels</label>
+        </p-floatlabel>
+
+        <!-- URL -->
+        <p-floatlabel>
+            <input pInputText id="url" [(ngModel)]="url" name="url" autocomplete="off" />
+            <label for="url">URL</label>
+        </p-floatlabel>
+
+        <!-- Proficiencies -->
+        <span>
+            <h2>proficies</h2>
+            @for(prof of proficies; track $index){
+                <p-floatlabel>
+                    <input pInputText [(ngModel)]="prof.name" placeholder="proficies name" />
+                </p-floatlabel>
+            }
+            <button (click)="add(proficies)">Add proficies</button>
+        </span>
+        
+        <!-- Proficiency Choices -->
+        <span>
+            <h2>Proficiency Choices</h2>
+            <div class="choice">
+                @for(choice of proficiesChoice; track $index){
+                    <p-floatlabel>
+                        <input pInputText type="number" [(ngModel)]="choice.choose" placeholder="Choose"/>
+                        <input pInputText [(ngModel)]="choice.desc" placeholder="Description" />
+                        <input pInputText [(ngModel)]="choice.type" placeholder="Type"/>
+                    </p-floatlabel>
+                }
+            </div>
+            <button (click)="add(proficiesChoice)">Add Proficiency Choice</button>
+        </span>
+        
+        <!-- Saving Throws -->
+        <span>
+            <h2>Saving Throws</h2>
+            @for(save of savingThrows; track $index){
+                <p-floatlabel>
+                    <input pInputText [(ngModel)]="savingThrows[$index].name" name="savingThrow{{$index}}" />
+                </p-floatlabel>
+            }
+            <button (click)="add(savingThrows)">Add saving throws</button>
+        </span>
+
+        <!-- Subclasses -->
+        <div>
+            <h2>Subclasses</h2>
+            @for(sub of subClasses; track $index){
+                <p-floatlabel>
+                    <input pInputText [(ngModel)]="subClasses[$index].name" name="subclass{{$index}}" />
+                </p-floatlabel>
+            }
+            <button (click)="add(subClasses)">Add subClasses</button>
+        </div>
+
+        <!-- Submit button -->
+        <p-button label="Salva" severity="success" (onClick)="edit()" />
+
+    </div>
+
+    }
+}
