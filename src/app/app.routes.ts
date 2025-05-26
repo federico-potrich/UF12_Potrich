@@ -83,14 +83,6 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'character',
-        component: CharacterDataComponent
-    },
-    {
-        path: 'post/:category',
-        component: PostNewItemComponent
-    },
-    {
         path: '**',
         component: NotFoundComponent,
     },
