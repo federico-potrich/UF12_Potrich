@@ -16,6 +16,7 @@ import { ProficienciesComponent } from '../core/components/character/proficienci
 import { SkillsComponent } from '../core/components/character/skills/skills.component';
 import { EquipmentPageComponent } from '../core/components/equipment-page/equipment-page.component';
 import { EditPostComponent } from '../core/feature/edit-post/edit-post.component';
+import { ContainerCreateCharacterSheetComponent } from '../core/components/characterSheet/container-create-character-sheet/container-create-character-sheet.component';
 
 export const routes: Routes = [
     {
@@ -81,6 +82,10 @@ export const routes: Routes = [
         children: [
             { path: 'classes', component: ClassesComponentComponent },
         ]
+    },
+    {
+        path:'generateSheet',
+        component:ContainerCreateCharacterSheetComponent
     },
     {
         path: '**',

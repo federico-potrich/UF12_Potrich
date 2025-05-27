@@ -170,6 +170,9 @@ export class AppComponent implements OnInit {
             },
             {
                 label: 'Create Character Sheet',
+                command:()=>{
+                    this.#router.navigate(['/generateSheet'])
+                }
             }
         ];
     }
