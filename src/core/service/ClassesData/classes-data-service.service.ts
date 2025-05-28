@@ -36,6 +36,8 @@ export class ClassesDataServiceService {
     readonly #CustomDataClassesList = signal<ClassModel[]>([]);
     readonly CustomDataClassesListComputed = computed(() => this.#CustomDataClassesList());
 
+    readonly #savingList = signal<any[]>([])
+    readonly savingListComputed = computed(()=>this.#savingList())
 
     getBriefData() {
         this.#http.get<ResComposed>(`${this.#URL}/classes`).subscribe((classList: ResComposed) => {
@@ -54,11 +56,20 @@ export class ClassesDataServiceService {
             this.#ClassesDataBriefList.set(combinedData);
         });
     }
+
     getCompleteData(index: string) {
         this.#http.get<ClassModel>(`${this.#URL}/classes/${index}`).subscribe((data: ClassModel) => {
             this.#ClassesDataCompleteList.set(data);
+            this.#savingList.set([])
+
+            data.saving_throws.map(el =>{
+                this.#http.get<any>(`${this.#URL}/ability-scores/${el.index}`).subscribe((ABS)=>{
+                    this.#savingList.update(list=>[...list, ABS])
+                })
+            })
         });
     }
+    
     getLevelData(index: string) {
         this.#http.get<ClassLevelModel[]>(`${this.#URL}/classes/${index}/levels`).subscribe((data: ClassLevelModel[]) => {
             this.#levelledDataClassesList.set(data);

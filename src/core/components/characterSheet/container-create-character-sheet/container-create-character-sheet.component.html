@@ -1,1 +1,216 @@
-<p>container-create-character-sheet works!</p>
+<h1>Hey Player</h1>
+
+
+
+<div class="card flex justify-center">
+    <p-accordion value="0">
+        <p-accordion-panel value="0" class="first-panel">
+            <p-accordion-header>Class, Race and Background</p-accordion-header>
+            <p-accordion-content>
+                <div class="card flex justify-center">
+                    <p-stepper [value]="1" class="basis-[50rem]" [linear]="true">
+                        <p-step-list>
+                            <p-step [value]="1">Class</p-step>
+                            <p-step [value]="2">Race</p-step>
+                            <p-step [value]="3">Background</p-step>
+                        </p-step-list>
+                        <p-step-panels>
+                            <p-step-panel [value]="1">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div class="flex flex-col h-48">
+                                        <div
+                                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                            <div class="card flex justify-center">
+                                                <p-select [options]="this.serviceClass.ClassesDataListComputed()"
+                                                    [(ngModel)]="selectedClass" optionLabel="name"
+                                                    placeholder="Select a Class" class="w-full md:w-56" />
+                                            </div>
+                                        </div>
+                                        <div class="flex pt-6 justify-end">
+                                            <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                                (onClick)="activateCallback(2)" />
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+
+                            <p-step-panel [value]="2">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div
+                                        class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                        <div class="card flex justify-center">
+                                            <p-select [options]="this.serviceRace.racesListComputed()"
+                                                [(ngModel)]="selectedRace" optionLabel="name"
+                                                placeholder="Select a Race" class="w-full md:w-56" />
+                                        </div>
+                                    </div>
+                                    <div class="flex pt-6 justify-between">
+                                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                            (onClick)="activateCallback(1)" />
+                                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                            (onClick)="activateCallback(3)" />
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+
+                            <p-step-panel [value]="3">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div
+                                        class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                        <div class="card flex justify-center">
+                                            <p-select [options]="this.serviceCharacter.CharacterDataListComputed()"
+                                                [(ngModel)]="selectedBackground" optionLabel="name"
+                                                placeholder="Select a Background" class="w-full md:w-56" />
+                                        </div>
+                                    </div>
+
+                                    <div class="flex pt-6 justify-between">
+                                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                            (onClick)="activateCallback(2)" />
+                                        <p-button label="Save" severity="secondary" icon="pi pi-download"
+                                            (onClick)="save()" />
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+                        </p-step-panels>
+                    </p-stepper>
+                </div>
+            </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="1"  class="second-panel">
+            <p-accordion-header>Statistics</p-accordion-header>
+            <p-accordion-content>
+                <div class="card flex justify-center">
+                    <p-stepper [value]="1" class="basis-[50rem]" [linear]="true">
+                        <p-step-list>
+                            <p-step [value]="1">Statistics</p-step>
+                            <p-step [value]="2">Level</p-step>
+                            <p-step [value]="3">Saving Throws</p-step>
+                            <p-step [value]="4">Skills</p-step>
+                        </p-step-list>
+                        <p-step-panels>
+                            <p-step-panel [value]="1">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div class="flex flex-col h-48">
+                                        <div
+                                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                            <div class="flexCol">
+                                                <label for="">
+                                                    <p-inputnumber inputId="integeronly" [(ngModel)]="stats.STRENGTH" />
+                                                    Modificatore: {{getModifier(stats.STRENGTH)}}
+                                                </label>
+                                                <label for="">
+                                                    <p-inputnumber inputId="integeronly"
+                                                        [(ngModel)]="stats.DEXTERITY" />
+                                                    Modificatore: {{getModifier(stats.DEXTERITY)}}
+                                                </label>
+                                                <label for="">
+                                                    <p-inputnumber inputId="integeronly"
+                                                        [(ngModel)]="stats.CONSTITUTION" />
+                                                    Modificatore: {{getModifier(stats.CONSTITUTION)}}
+                                                </label>
+                                                <label for="">
+                                                    <p-inputnumber inputId="integeronly"
+                                                        [(ngModel)]="stats.INTELLIGENCE" />
+                                                    Modificatore: {{getModifier(stats.INTELLIGENCE)}}
+                                                </label>
+                                                <label for="">
+                                                    <p-inputnumber inputId="integeronly" [(ngModel)]="stats.WISDOM" />
+                                                    Modificatore: {{getModifier(stats.WISDOM)}}
+                                                </label>
+                                                <label for="">
+                                                    <p-inputnumber inputId="integeronly" [(ngModel)]="stats.CHARISMA" />
+                                                    Modificatore: {{getModifier(stats.CHARISMA)}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="flex pt-6 justify-end">
+                                            <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                                (onClick)="activateCallback(2)" />
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+
+                            <p-step-panel [value]="2">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div
+                                        class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                        <label for="">
+                                            <p-inputnumber inputId="integeronly" [(ngModel)]="level" />
+                                            ProficiencyBonus: {{getProficiencyBonus(level)}}
+                                        </label>
+                                    </div>
+                                    <div class="flex pt-6 justify-between">
+                                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                            (onClick)="activateCallback(1)" />
+                                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                            (onClick)="activateCallback(3)" />
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+                            <p-step-panel [value]="3">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div>
+                                        <h1>Your saving throws:</h1>
+                                        <ul>
+                                            @for(st of serviceClass.savingListComputed(); track $index){
+                                            <li>
+                                                {{st.full_name}}
+                                            </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="flex pt-6 justify-between">
+                                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                            (onClick)="activateCallback(2)" />
+                                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                            (onClick)="activateCallback(4)" />
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+
+                            <p-step-panel [value]="4">
+                                <ng-template #content let-activateCallback="activateCallback">
+                                    <div class="cont">
+                                        @for(st of serviceClass.savingListComputed(); track $index){
+                                        <li>
+                                            {{st.full_name}}
+                                            <ol>
+                                                @for(skill of st.skills; track $index){
+                                                <li>
+                                                    {{skill.name}}
+                                                </li>
+                                                }
+                                                @empty {
+                                                {{'No skill for this stat'}}
+                                                }
+                                            </ol>
+                                        </li>
+                                        }
+                                    </div>
+
+                                    <div class="flex pt-6 justify-between">
+                                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                            (onClick)="activateCallback(3)" />
+                                        <p-button label="Submit" icon="pi pi-download" iconPos="right"
+                                            (onClick)="generatePDF()" />
+                                    </div>
+                                </ng-template>
+                            </p-step-panel>
+                        </p-step-panels>
+                    </p-stepper>
+                </div>
+            </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="2">
+            <p-accordion-header>Header III</p-accordion-header>
+            <p-accordion-content>
+                <p-button label="Submit" icon="pi pi-download" iconPos="right"
+                (onClick)="generatePDF()" />
+            </p-accordion-content>
+        </p-accordion-panel>
+    </p-accordion>
+</div>

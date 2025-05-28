@@ -4,7 +4,7 @@ export interface ClassModel {
   hit_die: number;
   proficiency_choices: ProficiencyChoice[];
   proficiencies: _Generic[];
-  saving_throws: _Generic[];
+  saving_throws: any[];
   class_levels: string;
   subclasses: _Generic[];
   spellcasting?: Spellcasting;

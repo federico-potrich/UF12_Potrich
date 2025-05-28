@@ -1,0 +1,13 @@
+::ng-deep .first-panel .p-accordioncontent-content {
+    height: 40vh;
+}
+
+::ng-deep .second-panel .p-accordioncontent-content {
+    height: 60vh;
+}
+
+.flexCol{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}

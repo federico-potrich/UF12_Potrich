@@ -19,6 +19,11 @@ export class CharacterDataService {
       this.#CharacterDataList.set(el)
     })
   }
+  getDataBetter(suffix: CharacterValue ='ability-scores'){
+    this.#http.get<any>(this.#URL+suffix).subscribe(el=>{
+      this.#CharacterDataList.set(el.results)
+    })
+  }
 }
 export type CharacterValue = "ability-scores" | "alignments" | "backgrounds" | "languages" | "proficiencies" | "skills";
 /**
