@@ -24,7 +24,7 @@ Offrire un servizio per visualizzare dati relativi a DnD(Dungeons and Dragons), 
 | ├── `proficiencies`      | `ProficienciesComponent`      | - Competenze.                                                    |
 | └── `skills`             | `SkillsComponent`             | - Abilità.                                                       |
 | `/view/monsters`         | `MonsterComponent`            | Lista dei mostri.                                                |
-| `/view/monsters/:index`  | `DetailsComponent`            | Dettagli di un mostro specifico.                                 |
+| `/view/races`            | `MonsterComponent`            | Lista delle razze.                                               |
 | `/view/equipment/:index` | `EquipmentPageComponent`      | Dettagli di un equipaggiamento.                                  |
 | `/view/:type/:index`     | `DetailsComponent`            | Dettagli generico per altri tipi (es. incantesimi, razze...)     |
 | `/edit/:category/:index` | `EditPostComponent`           | Modifica di un contenuto esistente.                              |
