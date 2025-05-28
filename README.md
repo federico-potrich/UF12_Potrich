@@ -1,7 +1,7 @@
 # DND Project
 
 ## Scopo
-Offrire un servizio per visualizzare dati relativi a DnD(Dungeons and Dragons), ma anche la possibilità di creare una schedina per il personaggio
+Offrire un servizio per visualizzare dati relativi a DnD(Dungeons and Dragons) stile manuale, ma anche la possibilità di creare una schedina per il personaggio
 
 ## Per avviare il progetto
 1. clonare la repository
@@ -32,3 +32,8 @@ Offrire un servizio per visualizzare dati relativi a DnD(Dungeons and Dragons), 
 | `/delete/classes`        | `ClassesComponentComponent`   | Gestione della cancellazione delle classi (in fase di sviluppo). |
 | `/character`             | `CharacterDataComponent`      | Accesso diretto ai dati del personaggio.                         |
 | `**`                     | `NotFoundComponent`           | Rotta di fallback per percorsi non validi.                       |
+
+# Nuova Feature (semplificata)
+## creazione di una schedina... 
+Sulla barra è presente una voce che permette di creare una schedina per giocare a DnD, al momento è presente poca roba, ma potrebbe aumentare permettendo alle persone di scegliere inoltre equipaggiamento e gli incantesimi (oppure direttamente dal sito di effettuare i tiri per calcolare la roba)!
+
