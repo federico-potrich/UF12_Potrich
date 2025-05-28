@@ -15,8 +15,11 @@ input{
     padding: 5px;
 }
 p-imagecompare{
-    height: 50%;
+    height: 50vh;
+    width: 25vw;
+    display: block;
 }
 .flexNorm{
     display: flex;
+    justify-content: space-around;
 }

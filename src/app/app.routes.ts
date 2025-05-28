@@ -17,6 +17,7 @@ import { SkillsComponent } from '../core/components/character/skills/skills.comp
 import { EquipmentPageComponent } from '../core/components/equipment-page/equipment-page.component';
 import { EditPostComponent } from '../core/feature/edit-post/edit-post.component';
 import { ContainerCreateCharacterSheetComponent } from '../core/components/characterSheet/container-create-character-sheet/container-create-character-sheet.component';
+import { RaceComponent } from '../core/components/race/race.component';
 
 export const routes: Routes = [
     {
@@ -57,7 +58,7 @@ export const routes: Routes = [
                 path: 'equipment/:index',
                 component: EquipmentPageComponent
             },
-            // { path: 'races', component: RacesComponent },
+            { path: 'races', component: RaceComponent },
             // { path: 'spells', component: SpellsComponent },
             { path: ':type/:index', component: DetailsComponent } //da rivedere
         ]

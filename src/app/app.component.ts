@@ -54,7 +54,10 @@ export class AppComponent implements OnInit {
                         items: [
                             {
                                 label: 'Races',
-                                icon: ''
+                                icon: '',
+                                command:()=>{
+                                    this.#router.navigate(['/view/races/'])
+                                }
                             },
                             {
                                 label: 'Subraces',

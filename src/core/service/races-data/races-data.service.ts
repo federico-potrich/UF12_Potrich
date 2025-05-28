@@ -12,7 +12,9 @@ export class RacesDataService {
   readonly #racesCompleteList = signal<any>([]);
   readonly racesCompleteListComputed = computed(() => this.#racesCompleteList());
 
-  constructor() { }
+  constructor() {
+    this.getData()
+  }
 
   getData() {
     this.#http.get<any>(this.#URL + "races").subscribe(el => {

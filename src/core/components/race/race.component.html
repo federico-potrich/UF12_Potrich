@@ -1,0 +1,8 @@
+<div class="race_container">
+    @for (race of service.racesListComputed(); track $index) {
+        <app-card [cardName]="race.name"></app-card>
+    }
+    @empty {
+        <h1>Nessun post disponibile</h1>
+    }
+</div>
