@@ -77,8 +77,7 @@
                 </div>
             </p-accordion-content>
         </p-accordion-panel>
-
-        <p-accordion-panel value="1"  class="second-panel">
+        <p-accordion-panel value="1" class="second-panel">
             <p-accordion-header>Statistics</p-accordion-header>
             <p-accordion-content>
                 <div class="card flex justify-center">
@@ -194,8 +193,8 @@
                                     <div class="flex pt-6 justify-between">
                                         <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
                                             (onClick)="activateCallback(3)" />
-                                        <p-button label="Submit" icon="pi pi-download" iconPos="right"
-                                            (onClick)="generatePDF()" />
+                                        <p-button label="Save" severity="secondary" icon="pi pi-download"
+                                            (onClick)="save2()" />
                                     </div>
                                 </ng-template>
                             </p-step-panel>
@@ -206,10 +205,88 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="2">
-            <p-accordion-header>Header III</p-accordion-header>
+            <p-accordion-header>HP and Armor</p-accordion-header>
             <p-accordion-content>
-                <p-button label="Submit" icon="pi pi-download" iconPos="right"
-                (onClick)="generatePDF()" />
+
+                <p-stepper [value]="1" class="basis-[50rem]">
+                    <p-step-list>
+                        <p-step [value]="1">Armor Class</p-step>
+                        <p-step [value]="2">Initiative</p-step>
+                        <p-step [value]="3">Speed</p-step>
+                        <p-step [value]="4">HP</p-step>
+                    </p-step-list>
+                    <p-step-panels>
+                        <p-step-panel [value]="1">
+                            <ng-template #content let-activateCallback="activateCallback">
+                                <div class="flex flex-col h-48">
+                                    <h1>Your CA</h1>
+                                    <h3>10 + {{getModifier(stats.DEXTERITY)}} = {{CA()}}</h3>
+                                    <div class="flex pt-6 justify-end">
+                                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                            (onClick)="activateCallback(2)" />
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-step-panel>
+
+                        <p-step-panel [value]="2">
+                            <ng-template #content let-activateCallback="activateCallback">
+                                <div class="flex flex-col h-48">
+
+                                    <h1>Your Initiative</h1>
+                                    <h3>dice + {{getModifier(stats.DEXTERITY)}}</h3>
+                                </div>
+                                <div class="flex pt-6 justify-between">
+                                    <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                        (onClick)="activateCallback(1)" />
+                                    <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                        (onClick)="activateCallback(3)" />
+                                </div>
+                            </ng-template>
+                        </p-step-panel>
+                        <p-step-panel [value]="3">
+                            <ng-template #content let-activateCallback="activateCallback">
+                                <div class="flex flex-col h-48">
+                                    <div class="data">
+                                        {{ serviceRace.racesCompleteListComputed().speed}}
+                                    </div>
+                                </div>
+                                <div class="flex pt-6 justify-between">
+                                    <p-button label="Back" severity="secondary" icon="pi pi-arrow-left"
+                                        (onClick)="activateCallback(2)" />
+                                    <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                                        (onClick)="activateCallback(4)" />
+                                </div>
+                            </ng-template>
+                        </p-step-panel>
+
+                        <p-step-panel [value]="4">
+                            <ng-template #content let-activateCallback="activateCallback">
+                                <div class="flex flex-col h-48">
+                                    <h1>Your hp</h1>
+                                    <p>Hit die: {{serviceClass.ClassesDataCompleteListComputed().hit_die}}</p>
+                                </div>
+                                <div class="flex pt-6 justify-start">
+                                    <p-button label="Back" icon="pi pi-arrow-left" iconPos="right"
+                                        (onClick)="activateCallback(3)" />
+                                </div>
+                            </ng-template>
+                        </p-step-panel>
+                    </p-step-panels>
+                </p-stepper>
+
+            </p-accordion-content>
+        </p-accordion-panel>
+        <p-accordion-panel value="3">
+            <p-accordion-header>Naming</p-accordion-header>
+            <p-accordion-content>
+                <div class="flexCol">
+                    <input type="text" placeholder="Write the name of your character" pInputText
+                        [(ngModel)]="selectedCharacterName" />
+                    <input type="text" placeholder="Write your name" pInputText [(ngModel)]="selectedPersonalName" />
+                    <p-button label="Submit" icon="pi pi-download" iconPos="right"
+                        (onClick)="generatePDF()" />
+                </div>
             </p-accordion-content>
         </p-accordion-panel>
     </p-accordion>

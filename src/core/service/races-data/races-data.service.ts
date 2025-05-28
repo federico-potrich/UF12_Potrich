@@ -9,12 +9,19 @@ export class RacesDataService {
   readonly #http = inject(HttpClient);
   readonly #racesList = signal<any>([]);
   readonly racesListComputed = computed(() => this.#racesList());
-  
+  readonly #racesCompleteList = signal<any>([]);
+  readonly racesCompleteListComputed = computed(() => this.#racesCompleteList());
+
   constructor() { }
-  
-  getData(){
-    this.#http.get<any>(this.#URL+"races").subscribe(el=>{
+
+  getData() {
+    this.#http.get<any>(this.#URL + "races").subscribe(el => {
       this.#racesList.set(el.results)
     })
+  }
+  getCompleteData(index: string) {
+    this.#http.get<any>(`${this.#URL}/races/${index}`).subscribe((data: any) => {
+      this.#racesCompleteList.set(data);
+    });
   }
 }

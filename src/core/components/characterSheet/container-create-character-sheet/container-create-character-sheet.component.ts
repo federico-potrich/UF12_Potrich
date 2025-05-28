@@ -44,6 +44,10 @@ export class ContainerCreateCharacterSheetComponent {
 
   skills = signal<any>({})
 
+  CA = signal<number>(10)
+  initiative = signal<number>(this.stats.DEXTERITY)
+  speed = signal<number>(0)
+
   constructor() {
     this.serviceClass.getBriefData()
     this.serviceCharacter.getDataBetter('backgrounds')
@@ -51,12 +55,18 @@ export class ContainerCreateCharacterSheetComponent {
   }
   save() {
     this.serviceClass.getCompleteData(this.serviceClass.ClassesDataListComputed().filter(el => el.name == this.selectedClass().name)[0].index)
+    this.serviceRace.getCompleteData(this.serviceRace.racesListComputed().filter((el:any) => el.name == this.selectedRace().name)[0].index)
+
     this.saving_thows.set(this.serviceClass.savingListComputed())
     this.skills.set(
       this.serviceClass.savingListComputed()
         .flatMap(entry => entry.skills)            // prende tutte le skills in un array piatto
         .map(skill => ({ name: skill.name, index: skill.index }))               // prende solo il nome
     );
+  }
+  save2(){
+    this.CA.set(10+this.getModifier(this.stats.DEXTERITY))
+    this.speed.set(this.serviceRace.racesListComputed().speed)
   }
 
   generatePDF() {
@@ -95,12 +105,26 @@ export class ContainerCreateCharacterSheetComponent {
       doc.text(`${stat}: ${score} (mod ${mod >= 0 ? '+' : ''}${mod})`, 25, y); y += 6;
     }
 
+
+    doc.setFontSize(14);
+    doc.text('Statistiche:', 20, y); y += 8;
+
+    doc.setFontSize(12);
+    doc.text(`CA (Classe Armatura): ${this.CA()}`, 25, y); y += 6;
+    doc.text(`Iniziativa: ${this.initiative() >= 0 ? '+' : ''}${this.initiative()}`, 25, y); y += 6;
+    doc.text(`Velocità: ${this.serviceRace.racesCompleteListComputed().speed} piedi`, 25, y); y += 6;
+
+    // Calcolo HP base per un barbaro livello 1 = 12 + Costituzione
+    const baseHP = 12 + this.getModifier(this.stats.CONSTITUTION);
+    doc.text(`Punti Ferita (HP): ${baseHP}`, 25, y); y += 10;
+
+
+    doc.setFontSize(12);
+    
     y += 6;
     doc.setFontSize(14);
     doc.text('Abilità Competenti:', 20, y); y += 8;
-
-    doc.setFontSize(12);
-    for (const skill of skills) {
+    for (const skill of this.serviceClass.savingListComputed().flatMap(entry => entry.skills).map(skill => ({ name: skill.name, index: skill.index }))) {
       const skillName = skill.name;
       const skillIndex = skill.index;
 
