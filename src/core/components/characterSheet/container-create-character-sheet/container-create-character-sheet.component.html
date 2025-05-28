@@ -280,13 +280,30 @@
         <p-accordion-panel value="3">
             <p-accordion-header>Naming</p-accordion-header>
             <p-accordion-content>
-                <div class="flexCol">
-                    <input type="text" placeholder="Write the name of your character" pInputText
-                        [(ngModel)]="selectedCharacterName" />
-                    <input type="text" placeholder="Write your name" pInputText [(ngModel)]="selectedPersonalName" />
+                <div class="flexNorm">
+                        <div class="flexCol">
+                            <input type="text" placeholder="Write the name of your character" pInputText [(ngModel)]="selectedCharacterName" />
+                            <input type="text" placeholder="Write your name" pInputText [(ngModel)]="selectedPersonalName" />
+                        </div>
+
+                        <div class="card flex justify-center">
+                            <h4>Background image for the sheet</h4>
+                            <div class="card flex justify-center">
+                                <p-imagecompare class="shadow-lg rounded-2xl">
+                                    <ng-template #left>
+                                        <img src="{{backgrounds[0].image}}" />
+                                    </ng-template>
+                                    <ng-template #right>
+                                        <img src="{{backgrounds[1].image}}" />
+                                    </ng-template>
+                                </p-imagecompare>
+                            </div>
+                            <p-selectbutton [options]="stateOptions" [(ngModel)]="value" optionLabel="label" optionValue="value" aria-labelledby="basic" />
+                        </div>
+
+                    </div>
                     <p-button label="Submit" icon="pi pi-download" iconPos="right"
                         (onClick)="generatePDF()" />
-                </div>
             </p-accordion-content>
         </p-accordion-panel>
     </p-accordion>
